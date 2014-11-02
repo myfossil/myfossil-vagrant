@@ -1,6 +1,6 @@
-# myfossil
+# myfossil-vagrant
 
-WordPress based CMS for the myFOSSIL project.
+Development environment for myFOSSIL.
 
 
 ## Development
@@ -22,27 +22,16 @@ following software:
 Then perform the following actions:
 
 ```
+$ rm -rf .git
+$ ./update.sh
 $ vagrant plugin install vagrant-hostmanager
 $ vagrant up
 $ vagrant ssh
-vagrant$ /vagrant/puppet/local/dev_db_import.sh
 vagrant$ vim /etc/nginx/nginx.conf
 ```
 
 In `nginx.conf`, comment out `sendfile on` by prepending a `#`. This fixes an 
 issue with caching and linking the host and guest OS directories.
-
-Now, that the server is set up, install the appropriate node modules for both the theme and the Buddypress plugin.
-
-```
-$ cd src/wp-content/themes/myfossil/
-$ npm install -g gulp && npm install
-$ gulp build
-$ cd ../../plugins/buddypress
-$ npm install
-$ grunt
-```
-
 
 #### Usage
 
@@ -66,51 +55,3 @@ version of the myFOSSIL website.
 In order to make development easier for everyone, we've chosen to use
 `subtrees` rather than `submodules`--this way you can develop under this parent
 project and commit changes back to the other repositories.
-
-
-#### Workflow
-
-If you wish to contribute, first fork this repository and the child repository
-that you wish to contribute to. 
-
-For example, if you wanted to contribute to the myFOSSIL theme, you would want
-to clone this repository and fork the theme repository. Then perform the
-following:
-
-```
-$ git clone https://github.com/myfossil/myfossil.git
-$ cd myfossil/src/wp-content/themes/myfossil
-$ git checkout -b theme/my-new-feature
-```
-
-Then make edits, commits, etc. as normal.
-
-Once you're ready to push your changes back to the theme repository, enter the
-**root of this repository** and perform the following.
-
-```
-$ git subtree push --prefix=src/wp-content/themes/myfossil git@github.com:<my-theme-repository-fork>.git <theme branch name>
-```
-
-This will push only the changes that you made to the theme to your theme fork.
-
-You can then submit a pull request like normal to the theme repository.
-
-
-#### Child Repositories
-
-| Repository                                                          | Type   | Path (i.e. `prefix`)                       |
-|---------------------------------------------------------------------|--------|--------------------------------------------|
-| [WordPress](https://github.com/myfossil/WordPress) (fork)           | core   | `src/wp-core`                              |
-| [BuddyPress](https://github.com/myfossil/BuddyPress) (fork)         | plugin | `src/wp-content/plugins/buddypress`        |
-| [bbPress](https://github.com/myfossil/bbpress) (fork)               | plugin | `src/wp-content/plugins/bbpress`           |
-| [myfossil-specimen](https://github.com/myfossil/wp-plugin-specimen) | plugin | `src/wp-content/plugins/myfossil-specimen` |
-| [myfossil-logging](https://github.com/myfossil/wp-plugin-logging)   | plugin | `src/wp-content/plugins/myfossil-logging`  |
-| [myfossil-theme](https://github.com/myfossil/wp-theme-myfossil)     | theme  | `src/wp-content/themes/myfossil`           |
-
-
-#### Reference
-
-If you are unfamiliar with git subtrees, read a [git subtree
-tutorial](https://medium.com/@v/git-subtrees-a-tutorial-6ff568381844) to get
-caught up.
