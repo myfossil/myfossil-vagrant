@@ -61,6 +61,11 @@ function update {
 
     DIRECTORY=${PARENT}/${NAME};
 
+    if [ ! -d "$PARENT" ]
+    then
+        mkdir -p $PARENT;
+    fi
+
     if [ -d "$DIRECTORY" ]
     then
         _pull $DIRECTORY;
