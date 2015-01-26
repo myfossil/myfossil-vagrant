@@ -37,11 +37,6 @@ function update {
             PARENT=src/wp-content/plugins;
             NAME=myfossil-resources;
             ;;
-        "myfossil-groups-meta")
-            REPO_URL=git@github.com:myfossil/myfossil-groups-meta.git;
-            PARENT=src/wp-content/plugins;
-            NAME=myfossil-groups-meta;
-            ;;
         "myfossil-specimen")
             REPO_URL=git@github.com:myfossil/myfossil-specimen.git;
             PARENT=src/wp-content/plugins;
@@ -75,7 +70,7 @@ function update {
 }
 
 for repo in `echo wordpress buddypress bbpress myfossil-resources \
-        myfossil-groups-meta myfossil-specimen myfossil-logging myfossil-theme`
+        myfossil-specimen myfossil-logging myfossil-theme`
 do
     update $repo;
 done
